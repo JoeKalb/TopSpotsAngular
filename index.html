@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="myApp"> <!--Make angular enables-->
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- bower:css -->
+    <!-- endbower -->
+	
+	<!-- inject:css -->
+	<!-- endinject -->
     <!--<link rel="stylesheet" href="map.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<title>Top Spots Angular</title>
+	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" ng-controller="MainController">
+<div class="container" ng-controller="MainController"> <!--Making the main controller-->
 	<h1>Top Spots San Diego Angular</h1>
 	<legend></legend>
 	<table class="table table-striped table-bordered table-condensed">
@@ -19,14 +23,44 @@
 			<th>Description</th>
 			<th>Location</th>
 		</tr>
-		<tr ng-repeat="data in places">
+		<tr ng-repeat="data in bakinsoda"> <!--Add a row loop for the data-->
+			<td>{{data.name}}</td> <!--Adding the names-->
+			<td>{{data.description}}</td> <!--Adding the description-->
+			<td><a href="http://www.google.com/maps/place/{{data.location[0]}},{{data.location[1]}}" target="_blank"><button type="button" class="btn btn-primary"> Check It Out! </button></a></td>
+		</tr>
+		<tr ng-repeat="data in stuff">
 			<td>{{data.name}}</td>
 			<td>{{data.description}}</td>
-			<td><a ng-href="http://www.google.com/maps/place/{{data.location[0]}},{{data.location[1]}}" target="_blank"><button type="button" class="btn btn-primary"> Check It Out! </button></a></td>
+			<td>{{data.location}}</td>
 		</tr>
 	</table>
+	<h2>Add Another Spot!</h2>
+	<legend></legend>
+	<form> <!--Making a form to submit new places-->
+		<div class="form-group"> 
+			<label for="newPlace">Enter a place</label>
+			<input type="data" placeholder="Add a place!" id="newPlace" class="form-control" ng-model="data.name">
+		</div>
+		<div class="form-group">
+			<label for="newDescription">Enter your description</label>
+			<input type="data" placeholder="Describe it!" id="newDescription" class="form-control" ng-model="data.description">
+		</div>
+		<div class="form-group">
+			<label for="newLocation">Where is it?</label>
+			<input type="data" placeholder="Now an address" id="newLocation" class="form-control" ng-model="data.location">
+		</div>
+		<button type="submit" class="btn btn-info btn-lg" ng-click="addData(data.name, data.description, data.location)">Add It!</button>
+	</form>
+	<p></p>
 </div>
-<script src="index.js"></script>
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<!-- endbower -->
+<!-- inject:js -->
+<script src="/app/index.js"></script>
+<!-- endinject -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKvhS1hltKeDHrh-Lz8f2KrXpJ2f4Zc14&callback=initMap"
 async defer></script>-->
 </body>
